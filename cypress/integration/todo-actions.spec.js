@@ -1,26 +1,42 @@
-import { TodoActions } from "../page-objects/todo-actions.page";
-import { TodoFiltering } from "../page-objects/todo-filtering.page";
+// import { TodoActions } from "../page-objects/todo-actions.page";
+// import { TodoFiltering } from "../page-objects/todo-filtering.page";
+
+import {
+  navigate,
+  add,
+  remove,
+  markAsComplete,
+  unmarkCompleted,
+  update,
+  validateItem,
+  validateRemoveItem,
+  validateListOfItems,
+  validateItemCompleted,
+  validateItemUncompleted
+} from "../page-objects/todo-actions.page";
+
+import { validateNumberOfActiveItems } from "../page-objects/todo-filtering.page";
 
 describe("Todo item", () => {
-  const todo = new TodoActions();
-  const filtering = new TodoFiltering();
+  // const = new TodoActions();
+  // const filtering = new TodoFiltering();
   const item = "Task";
   const newItem = "Task2";
 
   beforeEach(() => {
-    todo.navigate();
+    navigate();
     cy.addTodoItem(item);
   });
 
   it("add succeeded", () => {
     const newItem = "Task1";
-    todo.add(newItem);
-    todo.validateItem(newItem);
+    add(newItem);
+    validateItem(newItem);
   });
 
   it("marked as completed succeeded", () => {
-    todo.markAsComplete();
-    todo.validateItemCompleted();
+    markAsComplete();
+    validateItemCompleted();
   });
 
   context("completed", () => {
@@ -29,24 +45,24 @@ describe("Todo item", () => {
     });
 
     it("unmarked succeeded", () => {
-      todo.unmarkCompleted();
-      todo.validateItemUncompleted();
+      unmarkCompleted();
+      validateItemUncompleted();
     });
 
     it("remove succeeded", () => {
-      todo.remove(item);
-      todo.validateRemoveItem();
+      remove(item);
+      validateRemoveItem();
     });
   });
 
   it("remove succeeded", () => {
-    todo.remove(item);
-    todo.validateRemoveItem();
+    remove(item);
+    validateRemoveItem();
   });
 
   it("update succeeded", () => {
-    todo.update(item, newItem);
-    todo.validateItem(newItem);
+    update(item, newItem);
+    validateItem(newItem);
   });
 
   context("list", () => {
@@ -60,8 +76,8 @@ describe("Todo item", () => {
 
     it("of 5 items showed successfully", () => {
       const numberOfItems = 5;
-      todo.validateListOfItems(numberOfItems);
-      filtering.validateNumberOfActiveItems(numberOfItems);
+      validateListOfItems(numberOfItems);
+      validateNumberOfActiveItems(numberOfItems);
     });
   });
 });
