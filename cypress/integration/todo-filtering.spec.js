@@ -1,12 +1,21 @@
-import { TodoFiltering } from "../page-objects/todo-filtering.page";
+// import { TodoFiltering } from "../page-objects/todo-filtering.page";
+
+import {
+  navigate,
+  getAllItems,
+  getActiveItems,
+  getCompletedItems,
+  validateNumberOfActiveItems,
+  validateNumberOfShownItems
+} from "../page-objects/todo-filtering.page";
 
 describe("Filtering items", () => {
-  const filter = new TodoFiltering();
+  // const = new TodoFiltering();
   const item = "Task";
 
   beforeEach(() => {
     let n = 1;
-    filter.navigate();
+    navigate();
     while (n <= 2) {
       //in order to gain required state of app
       cy.addTodoItem(item + n);
@@ -17,17 +26,17 @@ describe("Filtering items", () => {
   });
 
   it("all succceded", () => {
-    filter.getAllItems();
-    filter.validateNumberOfShownItems(2);
+    getAllItems();
+    validateNumberOfShownItems(2);
   });
 
   it("active succeeded", () => {
-    filter.getActiveItems();
-    filter.validateNumberOfActiveItems(1);
+    getActiveItems();
+    validateNumberOfActiveItems(1);
   });
 
   it("completed succeede", () => {
-    filter.getCompletedItems();
-    filter.validateNumberOfShownItems(1);
+    getCompletedItems();
+    validateNumberOfShownItems(1);
   });
 });
