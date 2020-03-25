@@ -1,1 +1,7 @@
+*.swp
 tags
+node_modules/
+yarn-error.log
+cyperss/videos/
+cyperss/screenshots/
+.DS_Store
